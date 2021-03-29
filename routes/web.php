@@ -22,11 +22,16 @@ Route::get('/', function () {
 Route::get('users','UserController@list')
     ->name('get.users');
 
-Route::get('users/{id}','UserController@testShow')
-    ->name('get.users.test.show');
+Route::get('users/{userId}','UserController@show')
+    ->name('get.users.show');
 
-Route::post('users/{id}','UserController@testStore')
-    ->name('post.users.test.store');
+
+
+//Route::get('users/{id}','UserController@testShow')
+//    ->name('get.users.test.show');
+//
+//Route::post('users/{id}','UserController@testStore')
+//    ->name('post.users.test.store');
 
 
 
@@ -34,7 +39,7 @@ Route::post('users/{id}','UserController@testStore')
 //Route::get('users/{id}','User\ProfilController@show')
 //    ->name('get.user.profile');
 
-Route::get('users/{id}/address','User\ShowAddress')
-    ->name('get.user.address');
+//Route::get('users/{id}/address','User\ShowAddress')
+//    ->name('get.user.address');
 
 Route::resource('games','GameController');

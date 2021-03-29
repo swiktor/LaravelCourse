@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Faker\Factory;
 use http\Message\Body;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
@@ -12,9 +13,40 @@ class UserController extends Controller
 {
     public function list(Request $request)
     {
-//        dd($request);
-        return view('user.list');
+        $users = [];
+
+        $faker = Factory::create();
+
+        $count = $faker->numberBetween(3, 15);
+
+        for ($i = 0; $i < $count; $i++) {
+            $users[] = [
+                'userId' => $faker->numberBetween(1, 100),
+                'name' => $faker->firstName
+            ];
+        }
+
+        // @$users=[];
+        return view('user.list',['users' => $users]);
     }
+
+    public function show(int $userId)
+    {
+        $faker = Factory::create();
+        $user = [
+            'userId' => $userId,
+            'name' => $faker->name,
+            'firstName' => $faker->firstName,
+            'lastName' => $faker->lastName,
+            'city' => $faker->city,
+            'age' => $faker->numberBetween(0, 19),
+            'html' => '<b> Bold HTML </b>'
+        ];
+
+        return view('user.show',
+            ['user' => $user]);
+    }
+
 
     public function testShowOld(Request $request, int $id)
     {
