@@ -15,31 +15,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Home\MainPage')
+    ->name('home.mainPage');
 
-Route::get('users','UserController@list')
+Route::get('users', 'UserController@list')
     ->name('get.users');
 
-Route::get('users/{userId}','UserController@show')
-    ->name('get.users.show');
+Route::get('users/{userId}', 'UserController@show')
+    ->name('get.user.show');
 
-
-
-//Route::get('users/{id}','UserController@testShow')
-//    ->name('get.users.test.show');
-//
-//Route::post('users/{id}','UserController@testStore')
-//    ->name('post.users.test.store');
-
-
-
-
-//Route::get('users/{id}','User\ProfilController@show')
+//Route::get('users/{id}/profile', 'User\ProfilController@show')
 //    ->name('get.user.profile');
 
-//Route::get('users/{id}/address','User\ShowAddress')
-//    ->name('get.user.address');
+Route::get('users/{id}/address', 'User\ShowAddress')
+    ->where(['id' => '[0-9]+'])
+    ->name('get.users.address');
 
-Route::resource('games','GameController');
+//Route::resource('games', 'GameController');
+Route::resource('games', 'GameController')
+    ->only([
+        'index', 'show'
+    ]);
+
+Route::resource('admin/games', 'GameController')
+    ->only([
+        'store', 'create', 'destroy'
+    ]);

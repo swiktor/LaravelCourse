@@ -17,7 +17,7 @@ return [
     'enabled' => env('DEBUGBAR_ENABLED', null),
     'except' => [
         'telescope*',
-        'horizon*',
+        'horizon*'
     ],
 
     /*
@@ -34,12 +34,10 @@ return [
      */
     'storage' => [
         'enabled'    => true,
-        'driver'     => 'file', // redis, file, pdo, socket, custom
+        'driver'     => 'file', // redis, file, pdo, custom
         'path'       => storage_path('debugbar'), // For file driver
         'connection' => null,   // Leave null for default connection (Redis/PDO)
-        'provider'   => '', // Instance of StorageInterface for custom driver
-        'hostname'   => '127.0.0.1', // Hostname to use with the "socket" driver
-        'port'       => 2304, // Port to use with the "socket" driver
+        'provider'   => '' // Instance of StorageInterface for custom driver
     ],
 
     /*
@@ -120,11 +118,11 @@ return [
         'mail'            => true,  // Catch mail messages
         'laravel'         => true, // Laravel version and environment
         'events'          => true, // All events fired
-        'default_request' => false, // Regular or special Symfony request logger
-        'logs'            => false, // Add the latest log messages
+        'default_request' => true, // Regular or special Symfony request logger
+        'logs'            => true, // Add the latest log messages
         'files'           => false, // Show the included files
-        'config'          => false, // Display config settings
-        'cache'           => false, // Display cache events
+        'config'          => true, // Display config settings
+        'cache'           => true, // Display cache events
         'models'          => true,  // Display models
         'livewire'        => true,  // Display Livewire (when available)
     ],
@@ -149,25 +147,24 @@ return [
             'timeline'          => false,  // Add the queries to the timeline
             'explain' => [                 // Show EXPLAIN output on queries
                 'enabled' => false,
-                'types' => ['SELECT'],     // Deprecated setting, is always only SELECT
+                'types' => ['SELECT'],     // // workaround ['SELECT'] only. https://github.com/barryvdh/laravel-debugbar/issues/888 ['SELECT', 'INSERT', 'UPDATE', 'DELETE']; for MySQL 5.6.3+
             ],
             'hints'             => false,    // Show hints for common mistakes
-            'show_copy'         => false,    // Show copy button next to the query
         ],
         'mail' => [
-            'full_log' => false,
+            'full_log' => false
         ],
         'views' => [
             'data' => false,    //Note: Can slow down the application, because the data can be quite large..
         ],
         'route' => [
-            'label' => true,  // show complete route on bar
+            'label' => true  // show complete route on bar
         ],
         'logs' => [
-            'file' => null,
+            'file' => null
         ],
         'cache' => [
-            'values' => true, // collect cache values
+            'values' => true // collect cache values
         ],
     ],
 

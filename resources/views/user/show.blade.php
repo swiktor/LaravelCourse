@@ -1,53 +1,25 @@
 @extends('layout.main')
 
-@section('title','Użytkownik')
+@section('title', 'Użytkownik')
 
 @section('sidebar')
     @parent
-    Sidebar dziecka
+    <div>Lista użytkowników: <a href="{{ route('get.users') }}">Link</a></div>
 @endsection
-
-@auth()
-    zalogowany
-@endauth
-
-@guest()
-    niezalogowany
-@endguest
-
-
 
 @section('content')
-    <hr/>
-    <h3>Informacje o użytkowniku</h3>
-    <ul>
-        <li>User ID: {{$user['userId']}} </li>
-        <li>Name: {{$user['name']}}</li>
-        <li>First name: {{$user['firstName']}}</li>
-        <li>Last name: {{$user['lastName']}}</li>
-        <li>City {{$user['city']}}</li>
-        <li>Age: {{$user['age']}}</li>
+    <div class="card">
+        <h5 class="card-header">{{ $user['name'] }}</h5>
+        <div class="card-body">
+            <ul>
+                <li>Id: {{ $user['id'] }}</li>
+                <li>Imię: {{ $user['firstName'] }}</li>
+                <li>Nazwisko: {{ $user['lastName'] }}</li>
+                <li>Miasto: {{ $user['city'] }}</li>
+                <li>Wiek: {{ $user['age'] }}</li>
+            </ul>
 
-        @if($user['age']>=18)
-            <div>Osoba dorosła</div>
-        @else
-            <div>Dzieciak</div>
-        @endif
-
-        <li>HTML: {{$user['html']}}</li>
-    </ul>
-
-    @isset($nick)
-        Nick: {{$nick}}
-    @else
-        Nie ma nicku
-    @endisset
-
-    <div>
-
+            <a href="{{ route('get.users') }}" class="btn btn-light">Lista użytkowników</a>
+        </div>
     </div>
-
-
-    <hr/>
 @endsection
-
