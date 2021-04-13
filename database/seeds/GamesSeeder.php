@@ -18,13 +18,14 @@ class GamesSeeder extends Seeder
         $faker = Factory::create();
 
         $games = [];
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $games[] =
                 [
                     'title' => $faker->words($faker->numberBetween(1, 3), true),
                     'description' => $faker->sentence(),
                     'publisher' => $faker->randomElement(['EA', 'STEAM', 'ORIGIN', 'EPIC']),
                     'genre_id' => $faker->numberBetween(1, 5),
+                    'score' => $faker->numberBetween(1, 10),
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ];
